@@ -1,16 +1,38 @@
 package com.tobiascen.movilesstudio
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.tobiascen.movilesstudio.ui.theme.MovilesStudioTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,12 +41,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MovilesStudioTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                CounterA()
             }
         }
     }
@@ -38,10 +55,60 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MovilesStudioTheme {
-        Greeting("Android")
+fun CounterA() {
+
+
+    var counterA by rememberSaveable { mutableStateOf(0) }
+    var counterB by rememberSaveable { mutableStateOf(0) }
+
+    Box(
+        modifier = Modifier.fillMaxSize().padding(10.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            //  Texto A
+            Text("Clics boton A: $counterA veces")
+            Spacer(modifier = Modifier.height(16.dp))
+            // Texto B
+            Text("Clics boton B: $counterB veces")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Botones A y B
+            Row (
+                modifier = Modifier.padding(10.dp)
+            ){
+                Button(
+                onClick = { counterA++ },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF03A9F4))
+            ) {
+                Text("Boton A")
+            }
+                Spacer(modifier = Modifier.width(32.dp))
+
+                Button(
+                    onClick = { counterB++ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF03A9F4))
+                ) {
+                    Text("Boton B")
+                }
+            }
+
+            //Boton Reset
+            Button(
+                onClick = {
+                    counterA = 0
+                    counterB = 0
+                          },
+                modifier = Modifier.size(width = 180.dp, height = 90.dp).padding(20.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF3A3A))
+            ) {
+                Text("Reset",
+                    fontSize = 20.sp)
+            }
+        }
     }
 }
+
