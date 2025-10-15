@@ -1,36 +1,38 @@
 package com.tobiascen.movilesstudio
 
+
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Space
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tobiascen.movilesstudio.ui.theme.MovilesStudioTheme
@@ -41,22 +43,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MovilesStudioTheme {
-                CounterA()
+                ejemplo()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun CounterA() {
+fun Counter() {
 
 
     var counterA by rememberSaveable { mutableStateOf(0) }
@@ -91,6 +85,7 @@ fun CounterA() {
                 Button(
                     onClick = { counterB++ },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF03A9F4))
+
                 ) {
                     Text("Boton B")
                 }
@@ -107,6 +102,59 @@ fun CounterA() {
             ) {
                 Text("Reset",
                     fontSize = 20.sp)
+            }
+
+
+        }
+    }
+}
+
+@Composable
+fun Password(){
+    Column (
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
+            var password by rememberSaveable { mutableStateOf("") }
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            placeholder = { Text("Password") },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation()
+        )
+    }
+}
+
+@Composable
+fun ejemplo(){
+    Box(modifier = Modifier.fillMaxSize()
+        .background(color = Color.Red)
+    ){
+        Column (modifier = Modifier
+            .background(color = Color.Green)
+            .fillMaxWidth(0.5f)
+            .fillMaxHeight(0.5f)
+            , verticalArrangement = Arrangement.SpaceAround
+        ) {
+            Row (modifier = Modifier
+                .background(color = Color.Blue)
+                .fillMaxWidth()
+
+            ){
+                Text(text = "Hola")
+                Box(modifier = Modifier
+                    .background(color = Color.Yellow)
+                    .width(100.dp)
+                    .height(50.dp)
+                    .padding(10.dp)
+                    .clickable{
+                        //Cuando se hace click sale por consola esto
+                        Log.d("Control", "Se ha hecho click")
+                    }
+                ){
+                    Text(text="Click", color = Color.Black)
+                }
             }
         }
     }
