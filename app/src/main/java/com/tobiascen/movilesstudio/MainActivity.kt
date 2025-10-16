@@ -32,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,7 +44,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MovilesStudioTheme {
-                ejemplo()
+                Password()
             }
         }
     }
@@ -119,7 +120,13 @@ fun Password(){
         TextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = { Text("Password") },
+            label = { Text("Contraseña")},
+            placeholder = { Text("Introduce tu contraseña") },
+            leadingIcon = {
+                //Icon(
+                //   painter = painterResource(android.R.drawable.ic_partial_secure)
+                //)
+            },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation()
         )
