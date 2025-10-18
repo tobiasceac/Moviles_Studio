@@ -1,6 +1,7 @@
 package com.tobiascen.movilesstudio
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -22,6 +23,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -34,8 +38,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tobiascen.movilesstudio.Login.Main
 import com.tobiascen.movilesstudio.ui.theme.MovilesStudioTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +50,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MovilesStudioTheme {
-                Password()
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    LoginScreen()
+                }
             }
         }
     }
@@ -123,9 +135,10 @@ fun Password(){
             label = { Text("Contraseña")},
             placeholder = { Text("Introduce tu contraseña") },
             leadingIcon = {
-                //Icon(
-                //   painter = painterResource(android.R.drawable.ic_partial_secure)
-                //)
+                Icon(
+                    painter = painterResource(android.R.drawable.ic_secure),
+                    contentDescription = "Contraseña"
+                )
             },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation()
