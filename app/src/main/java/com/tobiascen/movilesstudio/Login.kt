@@ -1,9 +1,8 @@
 package com.tobiascen.movilesstudio
 
-import android.R.attr.onClick
-import android.widget.Button
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,10 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -86,13 +88,20 @@ fun LoginScreen(){
             )
             Spacer(modifier = Modifier.height(20.dp))
 
-            Text(
-                modifier = Modifier.align(Alignment.End),
-                text = "¿Olvidaste tu contraseña?",
-                color = Color(0xFF4A5FDB),
-                fontWeight = FontWeight.SemiBold
+            TextButton(
+                onClick = { /* Acción */ },
+                modifier = Modifier
+                    .align(Alignment.End),
+            ){
+                Text(
 
-            )
+                    text = "¿Olvidaste tu contraseña?",
+                    color = Color(0xFF4A5FDB),
+                    fontWeight = FontWeight.SemiBold
+
+                )
+            }
+
             Spacer(modifier = Modifier.height(20.dp))
 
             LoginButton(
@@ -121,25 +130,9 @@ fun LoginScreen(){
 
             )
             Row(){
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_google),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = Color.Unspecified
-                )
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_facebook),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = Color.Unspecified
-                )
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_apple),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = Color.Unspecified
-                )
-
+                LoginNext(R.drawable.ic_google)
+                LoginNext(R.drawable.ic_facebook)
+                LoginNext(R.drawable.ic_apple)
             }
         }
     }
@@ -192,11 +185,37 @@ fun LoginButton(onClick: () -> Unit) {
     Button(
         onClick = onClick,
         modifier = Modifier
-            .fillMaxWidth()
-
-
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF4A5FDB),  // ← Color de fondo
+        )
     ) {
         Text("Iniciar Sesión")
+    }
+}
+
+@Composable
+fun LoginNext(
+    icon: Int
+    ){
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .width(85.dp)
+            .padding(10.dp),
+        shape = RoundedCornerShape(10),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0x52A3A3AF),  // ← Color de fondo
+        )
+
+    ) {
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = null,
+            modifier = Modifier
+                .size(29.dp),
+            tint = Color.Unspecified
+        )
     }
 }
 
